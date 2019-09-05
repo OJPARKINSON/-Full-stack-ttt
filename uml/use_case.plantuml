@@ -1,0 +1,13 @@
+@startuml Board
+    left to right direction
+    actor player1
+    actor player2_or_AI
+    rectangle Game {
+        player1 -- (Starts tic tac toe)
+        (Player 2 takes their turn) -- player2_or_AI
+        (Loops until a game \n is finished)
+        player1 -- (Updates the stats for the players)
+        (Updates the stats for the players) -- player2_or_AI
+        }
+
+@enduml

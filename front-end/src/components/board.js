@@ -63,6 +63,10 @@ class Board extends React.Component {
         }
     }
 
+    restart() {
+        this.squares = Array(9).fill(null);
+    }
+
 
   render() {
     const winner = this.winner(this.state.squares);
@@ -94,6 +98,9 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <form action={this.restart()}>
+            <input type="submit"/>
+        </form>
     </div>
     )
   }

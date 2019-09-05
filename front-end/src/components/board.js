@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Board extends React.Component {
     constructor(props) {
@@ -7,13 +8,13 @@ class Board extends React.Component {
     }
 
     renderSquare(i) {
-        return <button onClick={() => this.handleClick(i)}>{this.state.squares[i]}</button>
+        return <button onClick={() => this.handlePick(i)}>{this.state.squares[i]}</button>
     }
 
-    handleClick(i) {
+    handlePick(i) {
         const squares = this.state.squares.slice();
 		if (this.winner(squares) || squares[i]) {
-			return;
+            return;
 		}
 
 		if(this.full(squares) === true) {
@@ -42,6 +43,15 @@ class Board extends React.Component {
         for (let i = 0; i < win_combination.length; i++) {
             const [a, b, c] = win_combination[i];
             if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                if (squares[a] === "O") {
+                    axios.get(`http://127.0.0.1:9393/increaseWins?name=${this.state.inputName}`);
+                    console.log(squares[a]);
+                    window.location.reload();
+                } else {
+                    axios.get(`http://127.0.0.1:9393/increaseWins?name=AI`);
+                    console.log(squares[a]);
+                    window.location.reload();
+                }
                 return squares[a];
             }
         }
@@ -99,7 +109,7 @@ class Board extends React.Component {
           {this.renderSquare(8)}
         </div>
         <form action={this.restart()}>
-            <input type="submit"/>
+            <input type="submit" value="New game"/>
         </form>
     </div>
     )

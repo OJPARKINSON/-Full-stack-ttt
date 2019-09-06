@@ -1,7 +1,4 @@
-require_relative "../lib/Kanban"
+require_relative "../lib/TTT"
 
-board = Board.create(title: "test", last_viewed: Time.new.to_s)
-member = Member.create(name: "mr test")
-task = Task.create(status: "test", last_viewed: Time.new.to_s, text: "test", member_id: member.id, board_id: board.id)
-
-12.times {|n| Board.create(title: "Board #{n.to_s}", last_viewed: Time.new.to_s)}
+user = User.create(user_name: "Tom", wins: 0, loses: 0, games_played: 0, last_played: Time.new.to_s)
+game = Game.create(board: "x,x,x,x,x,x,x,x,x", player1_id: 1, player2_id: 2, timePlayed: Time.new.to_s)

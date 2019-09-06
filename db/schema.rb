@@ -10,23 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_085325) do
+ActiveRecord::Schema.define(version: 2019_09_05_123322) do
 
-  create_table "boards", force: :cascade do |t|
-    t.string "title"
-    t.string "last_viewed"
+  create_table "games", force: :cascade do |t|
+    t.string "board"
+    t.integer "player1_id"
+    t.integer "player2_id"
+    t.string "timePlayed"
   end
 
-  create_table "members", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "status"
-    t.string "last_viewed"
-    t.string "text"
-    t.integer "member_id"
-    t.integer "board_id"
+  create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.integer "wins"
+    t.integer "loses"
+    t.integer "games_played"
+    t.string "last_played"
   end
 
 end

@@ -20,19 +20,31 @@ class App extends React.Component {
   
   getPlayer(name, player) {
     if (player === 1) {
-      axios.get(`http://127.0.0.1:9393/userStats?name=${name}`)
+      axios.get(`http://127.0.0.1:9393/userStats?name=${name}&type=old`)
       .then(res => {
         var result = res.data
         console.log(result)
         this.setState({player1: result})
       })
+      .catch(function (error) {
+        axios.get(`http://127.0.0.1:9393/userStats?name=${name}&type=new`)
+        .then(
+          this.getPlayer(name, 1)
+        )
+      })
     }
     if (player === 2) {
-      axios.get(`http://127.0.0.1:9393/userStats?name=${name}`)
+      axios.get(`http://127.0.0.1:9393/userStats?name=${name}&type=old`)
       .then(res => {
         var result = res.data
         console.log(result)
         this.setState({player2: result})
+      })
+      .catch(function (error) {
+        axios.get(`http://127.0.0.1:9393/userStats?name=${name}&type=new`)
+        .then(
+          this.getPlayer(name, 2)
+        )
       })
     }
   } 

@@ -7,7 +7,11 @@ class Server < Sinatra::Base
 
     get '/userStats' do
         headers 'Access-Control-Allow-Origin' => '*'
-        user = User.find_by(user_name: params[:name])
+        if params[:type] == "old" then
+            user = User.find_by(user_name: params[:name])
+        else 
+            user = User.create(user_name: params[:name], wins: 0, loses: 0, games_played: 0, last_played: Time.new.to_s)
+         end 
         response = [user.id, user.user_name, user.wins.to_s, user.loses.to_s, user.games_played.to_s, user.last_played]
         return response.to_s
     end
